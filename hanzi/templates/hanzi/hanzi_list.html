@@ -13,6 +13,9 @@
     <div class="row">
 	<h1 class="title">Hanzi list</h1>
 	<div class="col-sm-10 col-sm-offset-1">
+	
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
 	{% for hanzi in hanzis %}
 	<div class="col-md-4 col-sm-6">
 	<div class="card-container">
@@ -34,7 +37,7 @@
                      </div>
                      <div class="footer">
                          <div class="rating">
-                             <i class="fa fa-mail-forward"></i> Auto Rotation
+                             <i class="fa fa-mail-forward"></i> Rotate
                          </div>
                      </div>
                  </div>
@@ -45,21 +48,30 @@
                  </div>
                  <div class="content">
                      <div class="main">
-                         <h4 class="text-center">{{ hanzi.translation }}</h4>
+						 
+                         <h4 class="text-center">{{ hanzi.allTranslations }}</h4>
+						
                          <p class="text-center"></p>
 
                          <div class="stats-container">
                              <div class="stats">
-                                 <h4>{{ hanzi.stroke_count }}</h4>
+                                {% if hanzi.classifiers.all %}
+									<h4>{{ hanzi.allClassifiers }}</h4>
+								{% else %}
+									<h4>NA</h4>
+								{% endif %}
                                  <p>
-                                     Stroke Count
+                                     Classifier
                                  </p>
                              </div>
                              <div class="stats">
-                                 <h4>{{ hanzi.hanzi }}</h4>
+					
+                                 <h4>{{ hanzi.pinyin}}</h4>
+							
                                  <p>
-                                     Hanzi
+                                     Pinyin
                                  </p>
+							 
                              </div>
                              <div class="stats">
                                  <h4>{{ hanzi.hanzi_traditional }}</h4>
