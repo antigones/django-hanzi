@@ -4,3 +4,6 @@ myvenv
 db.sqlite3
 /static
 .DS_Store
+/test
+cedict_ts.u8
+query.txt

@@ -30,8 +30,8 @@
                  </div>
                  <div class="content">
                      <div class="main">
-                         <h3 class="name">{{ hanzi.simplified }}</h3>
-                         <p class="profession">{{ hanzi.allPinyins | linebreaksbr }}</p>
+                         <h3 class="name">{{ hanzi.hanzi }}</h3>
+                         <p class="profession">{{ hanzi.pinyin|linebreaksbr }}</p>
 
                          <p class="text-center"></p>
                      </div>
@@ -66,7 +66,7 @@
                              </div>
                              <div class="stats">
 					
-                                 <h4>{{ hanzi.allPinyins}}</h4>
+                                 <h4>{{ hanzi.pinyin}}</h4>
 							
                                  <p>
                                      Pinyin
@@ -74,7 +74,7 @@
 							 
                              </div>
                              <div class="stats">
-                                 <h4>{{ hanzi.traditional }}</h4>
+                                 <h4>{{ hanzi.hanzi_traditional }}</h4>
                                  <p>
                                      Traditional
                                  </p>

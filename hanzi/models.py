@@ -4,28 +4,34 @@ from django.db import models
 
 from django.utils import timezone
 
-class HanziTranslation(models.Model):
+class Translation(models.Model):
 	translation = models.TextField()
 	
 	def __str__(self):
 		return self.translation
 	
-class HanziClassifier(models.Model):
+class Classifier(models.Model):
 	classifier = models.CharField(max_length=100)
 	
 	def __str__(self):
 		return self.classifier
-
-	
-class Hanzi(models.Model):
-	author = models.ForeignKey('auth.User')
-	hanzi = models.CharField(max_length=100)
-	hanzi_traditional = models.CharField(max_length=100)
-	radicals = models.ManyToManyField('self')
-	translations = models.ManyToManyField('HanziTranslation')
-	classifiers = models.ManyToManyField('HanziClassifier')
+		
+class Pinyin(models.Model):
 	pinyin = models.CharField(max_length=4)
 	pinyin_number_notation = models.CharField(max_length=5)
+	
+	def __str__(self):
+		return self.pinyin
+		
+
+class Hanzi(models.Model):
+	author = models.ForeignKey('auth.User')
+	simplified = models.CharField(max_length=100)
+	traditional = models.CharField(max_length=100)
+	radicals = models.ManyToManyField('self')
+	translations = models.ManyToManyField('Translation')
+	classifiers = models.ManyToManyField('Classifier')
+	pinyins = models.ManyToManyField('Pinyin')
 	stroke_count = models.IntegerField()
 	created_date = models.DateTimeField(
             default=timezone.now)
@@ -41,9 +47,14 @@ class Hanzi(models.Model):
 	def allClassifiers(self):
 		return ', '.join([str(classifier) for classifier in self.classifiers.all()])
 		
+	def allPinyins(self):
+		return ', '.join([str(pinyin) for pinyin in self.pinyins.all()])
+	
 	def publish(self):
 		self.published_date = timezone.now()
 		self.save()
+	
+	
 
 	def __str__(self):
 		return self.hanzi
